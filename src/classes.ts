@@ -79,6 +79,7 @@ class ITDepartment extends Department {
   }
 }
 
+console.log("--------------Classes--------------");
 console.log(Department.fiscalYear);
 const employee1 = Department.createEmployee("Max");
 console.log(employee1);

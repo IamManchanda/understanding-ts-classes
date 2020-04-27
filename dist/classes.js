@@ -96,6 +96,7 @@ var ITDepartment = (function (_super) {
     };
     return ITDepartment;
 }(Department));
+console.log("--------------Classes--------------");
 console.log(Department.fiscalYear);
 var employee1 = Department.createEmployee("Max");
 console.log(employee1);
