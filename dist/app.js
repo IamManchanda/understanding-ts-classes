@@ -39,6 +39,13 @@ var AccountingDepartment = (function (_super) {
         _this.lastReport = reports[0];
         return _this;
     }
+    AccountingDepartment.fetchInstance = function () {
+        if (this.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment("d1", []);
+        return this.instance;
+    };
     Object.defineProperty(AccountingDepartment.prototype, "readLastReport", {
         get: function () {
             if (this.lastReport)
@@ -92,7 +99,7 @@ var ITDepartment = (function (_super) {
 console.log(Department.fiscalYear);
 var employee1 = Department.createEmployee("Max");
 console.log(employee1);
-var accounting = new AccountingDepartment("d1", []);
+var accounting = AccountingDepartment.fetchInstance();
 console.log("Last Report: " + accounting.readLastReport);
 accounting.updateLastReport = "Year Mid Report";
 console.log("Last Report: " + accounting.readLastReport);

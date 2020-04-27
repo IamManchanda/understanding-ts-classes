@@ -12,6 +12,7 @@ abstract class Department {
   addEmployee(employee: string) {
     this.employees.push(employee);
   }
+
   printEmployeeInformation() {
     console.log(this.employees.length);
     console.log(this.employees);
@@ -20,10 +21,19 @@ abstract class Department {
 
 class AccountingDepartment extends Department {
   private lastReport: string;
+  private static instance: AccountingDepartment;
 
-  constructor(id: string, private reports: string[]) {
+  private constructor(id: string, private reports: string[]) {
     super(id, "Accounting");
     this.lastReport = reports[0];
+  }
+
+  static fetchInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountingDepartment("d1", []);
+    return this.instance;
   }
 
   get readLastReport() {
@@ -39,14 +49,17 @@ class AccountingDepartment extends Department {
   describe() {
     console.log(`Accounting Department - ID: ${this.id}`);
   }
+
   addEmployee(employee: string) {
     if (employee === "Max") return;
     this.employees.push(employee);
   }
+
   addReport(report: string) {
     this.reports.push(report);
     this.lastReport = report;
   }
+
   printReports() {
     console.log(this.reports);
   }
@@ -60,6 +73,7 @@ class ITDepartment extends Department {
   describe() {
     console.log(`IT Department - ID: ${this.id}`);
   }
+
   printAdmins() {
     console.log(this.admins);
   }
@@ -69,7 +83,7 @@ console.log(Department.fiscalYear);
 const employee1 = Department.createEmployee("Max");
 console.log(employee1);
 
-const accounting = new AccountingDepartment("d1", []);
+const accounting = AccountingDepartment.fetchInstance();
 console.log(`Last Report: ${accounting.readLastReport}`);
 accounting.updateLastReport = "Year Mid Report";
 console.log(`Last Report: ${accounting.readLastReport}`);
