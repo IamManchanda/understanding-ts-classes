@@ -1,6 +1,10 @@
 class Department {
+  static fiscalYear: number = 2020;
   protected employees: string[] = [];
   constructor(private readonly id: string, public name: string) {}
+  static createEmployee(name: string) {
+    return { name };
+  }
   describe(this: Department) {
     console.log(`Department (${this.id}): ${this.name}`);
   }
@@ -18,7 +22,12 @@ class AccountingDepartment extends Department {
 
   get readLastReport() {
     if (this.lastReport) return this.lastReport;
-    throw new Error("No report found.");
+    return "No report found.";
+  }
+
+  set updateLastReport(value: string) {
+    if (!value) throw new Error("Please add a valid report.");
+    this.addReport(value);
   }
 
   constructor(id: string, private reports: string[]) {
@@ -47,7 +56,14 @@ class ITDepartment extends Department {
   }
 }
 
+console.log(Department.fiscalYear);
+const employee1 = Department.createEmployee("Max");
+console.log(employee1);
+
 const accounting = new AccountingDepartment("d1", []);
+console.log(`Last Report: ${accounting.readLastReport}`);
+accounting.updateLastReport = "Year Mid Report";
+console.log(`Last Report: ${accounting.readLastReport}`);
 accounting.addEmployee("Max");
 accounting.addEmployee("Manu");
 accounting.addEmployee("Anna");
@@ -56,6 +72,7 @@ accounting.addReport("Something went wrong");
 accounting.describe();
 accounting.printEmployeeInformation();
 accounting.printReports();
+console.log(`Last Report: ${accounting.readLastReport}`);
 
 const infoTech = new ITDepartment("d2", ["Harry"]);
 infoTech.addEmployee("Harry");
@@ -65,12 +82,3 @@ infoTech.name = "Information Technology";
 infoTech.describe();
 infoTech.printEmployeeInformation();
 infoTech.printAdmins();
-
-/* 
-const accountingCopy = {
-  name: "Accounting 2",
-  describe: accounting.describe,
-};
-
-accountingCopy.describe(); 
-*/

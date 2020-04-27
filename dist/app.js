@@ -18,6 +18,9 @@ var Department = (function () {
         this.name = name;
         this.employees = [];
     }
+    Department.createEmployee = function (name) {
+        return { name: name };
+    };
     Department.prototype.describe = function () {
         console.log("Department (" + this.id + "): " + this.name);
     };
@@ -28,6 +31,7 @@ var Department = (function () {
         console.log(this.employees.length);
         console.log(this.employees);
     };
+    Department.fiscalYear = 2020;
     return Department;
 }());
 var AccountingDepartment = (function (_super) {
@@ -42,7 +46,16 @@ var AccountingDepartment = (function (_super) {
         get: function () {
             if (this.lastReport)
                 return this.lastReport;
-            throw new Error("No report found.");
+            return "No report found.";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AccountingDepartment.prototype, "updateLastReport", {
+        set: function (value) {
+            if (!value)
+                throw new Error("Please add a valid report.");
+            this.addReport(value);
         },
         enumerable: true,
         configurable: true
@@ -73,7 +86,13 @@ var ITDepartment = (function (_super) {
     };
     return ITDepartment;
 }(Department));
+console.log(Department.fiscalYear);
+var employee1 = Department.createEmployee("Max");
+console.log(employee1);
 var accounting = new AccountingDepartment("d1", []);
+console.log("Last Report: " + accounting.readLastReport);
+accounting.updateLastReport = "Year Mid Report";
+console.log("Last Report: " + accounting.readLastReport);
 accounting.addEmployee("Max");
 accounting.addEmployee("Manu");
 accounting.addEmployee("Anna");
@@ -82,6 +101,7 @@ accounting.addReport("Something went wrong");
 accounting.describe();
 accounting.printEmployeeInformation();
 accounting.printReports();
+console.log("Last Report: " + accounting.readLastReport);
 var infoTech = new ITDepartment("d2", ["Harry"]);
 infoTech.addEmployee("Harry");
 infoTech.addEmployee("Zuck");
