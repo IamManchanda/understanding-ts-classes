@@ -21,9 +21,6 @@ var Department = (function () {
     Department.createEmployee = function (name) {
         return { name: name };
     };
-    Department.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
-    };
     Department.prototype.addEmployee = function (employee) {
         this.employees.push(employee);
     };
@@ -60,6 +57,9 @@ var AccountingDepartment = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    AccountingDepartment.prototype.describe = function () {
+        console.log("Accounting Department - ID: " + this.id);
+    };
     AccountingDepartment.prototype.addEmployee = function (employee) {
         if (employee === "Max")
             return;
@@ -81,6 +81,9 @@ var ITDepartment = (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log("IT Department - ID: " + this.id);
+    };
     ITDepartment.prototype.printAdmins = function () {
         console.log(this.admins);
     };
