@@ -1,47 +1,81 @@
-// type AddFn = (a: number, b: number) => number;
-interface AddFn {
-  (a: number, b: number): number;
-}
-
-let add: AddFn;
-
-add = (n1: number, n2: number): number => {
-  return n1 + n2;
+type Admin = {
+  name: string;
+  priveleges: string[];
 };
 
-interface Named {
-  readonly name?: string;
-  outputName?: string;
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+
+type ElevatedEmployee = Admin & Employee;
+
+const e1: ElevatedEmployee = {
+  name: "Max",
+  priveleges: ["create-server"],
+  startDate: new Date(),
+};
+
+const e2: Employee = {
+  name: "Harry",
+  startDate: new Date(),
+};
+
+type Combineable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combineable & Numeric;
+
+function addAandB(a: Combineable, b: Combineable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
 }
 
-interface Greetable extends Named {
-  greet(phrase: string): void;
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log(`Name: ${emp.name}`);
+  if ("priveleges" in emp) {
+    console.log(`Priveleges: ${emp.priveleges}`);
+  }
+  if ("startDate" in emp) {
+    console.log(`Start Date: ${emp.startDate}`);
+  }
 }
 
-class Person implements Greetable {
-  age = 30;
+class Car {
+  drive() {
+    console.log("Driving a car...");
+  }
+}
 
-  constructor(public name?: string) {
-    if (name) {
-      this.name = name;
-    }
+class Truck {
+  drive() {
+    console.log("Driving a truck...");
   }
 
-  greet(phrase: string) {
-    if (this.name) {
-      console.log(`${phrase}, I am ${this.name}.`);
-    } else {
-      console.log(`${phrase}.`);
-    }
+  loadCargo(amount: number) {
+    console.log(`Loading cargo for Rs.${amount}`);
   }
 }
 
-let user1: Greetable;
-let user2: Greetable;
-user1 = new Person();
-user2 = new Person("Harry");
+type Vehicle = Car | Truck;
+const v1 = new Car();
+const v2 = new Truck();
 
-console.log("--------------Interfaces--------------");
-console.log(add(2, 3));
-user1.greet("Hello there");
-user2.greet("Hey there");
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(10000);
+  }
+}
+
+console.log("--------------Adv. Types--------------");
+console.log(e1);
+printEmployeeInformation(e1);
+console.log(e2);
+printEmployeeInformation(e2);
+useVehicle(v1);
+useVehicle(v2);
