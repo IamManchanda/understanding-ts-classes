@@ -1,3 +1,14 @@
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+  (a: number, b: number): number;
+}
+
+let add: AddFn;
+
+add = (n1: number, n2: number): number => {
+  return n1 + n2;
+};
+
 interface Named {
   readonly name: string;
 }
@@ -20,4 +31,5 @@ let user1: Greetable;
 user1 = new Person("Harry Manchanda");
 
 console.log("--------------Interfaces--------------");
+console.log(add(2, 3));
 user1.greet("Hello there");
