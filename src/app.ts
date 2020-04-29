@@ -100,6 +100,12 @@ function moveAnimal(animal: Animal) {
   console.log(`Moving at speed ${speed}`);
 }
 
+const userInputElement = document.getElementById("user-input");
+
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = "Hello there!";
+}
+
 console.log("--------------Adv. Types--------------");
 console.log(e1);
 printEmployeeInformation(e1);

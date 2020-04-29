@@ -1,10 +1,10 @@
 "use strict";
-var e1 = {
+const e1 = {
     name: "Max",
     priveleges: ["create-server"],
     startDate: new Date(),
 };
-var e2 = {
+const e2 = {
     name: "Harry",
     startDate: new Date(),
 };
@@ -15,35 +15,29 @@ function addAandB(a, b) {
     return a + b;
 }
 function printEmployeeInformation(emp) {
-    console.log("Name: " + emp.name);
+    console.log(`Name: ${emp.name}`);
     if ("priveleges" in emp) {
-        console.log("Priveleges: " + emp.priveleges);
+        console.log(`Priveleges: ${emp.priveleges}`);
     }
     if ("startDate" in emp) {
-        console.log("Start Date: " + emp.startDate);
+        console.log(`Start Date: ${emp.startDate}`);
     }
 }
-var Car = (function () {
-    function Car() {
-    }
-    Car.prototype.drive = function () {
+class Car {
+    drive() {
         console.log("Driving a car...");
-    };
-    return Car;
-}());
-var Truck = (function () {
-    function Truck() {
     }
-    Truck.prototype.drive = function () {
+}
+class Truck {
+    drive() {
         console.log("Driving a truck...");
-    };
-    Truck.prototype.loadCargo = function (amount) {
-        console.log("Loading cargo for Rs." + amount);
-    };
-    return Truck;
-}());
-var v1 = new Car();
-var v2 = new Truck();
+    }
+    loadCargo(amount) {
+        console.log(`Loading cargo for Rs.${amount}`);
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
 function useVehicle(vehicle) {
     vehicle.drive();
     if (vehicle instanceof Truck) {
@@ -51,7 +45,7 @@ function useVehicle(vehicle) {
     }
 }
 function moveAnimal(animal) {
-    var speed;
+    let speed;
     switch (animal.type) {
         case "bird":
             speed = animal.flyingSpeed;
@@ -62,7 +56,11 @@ function moveAnimal(animal) {
         default:
             speed = 0;
     }
-    console.log("Moving at speed " + speed);
+    console.log(`Moving at speed ${speed}`);
+}
+const userInputElement = document.getElementById("user-input");
+if (userInputElement) {
+    userInputElement.value = "Hello there!";
 }
 console.log("--------------Adv. Types--------------");
 console.log(e1);
