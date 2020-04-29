@@ -50,6 +50,20 @@ function useVehicle(vehicle) {
         vehicle.loadCargo(10000);
     }
 }
+function moveAnimal(animal) {
+    var speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+            break;
+        default:
+            speed = 0;
+    }
+    console.log("Moving at speed " + speed);
+}
 console.log("--------------Adv. Types--------------");
 console.log(e1);
 printEmployeeInformation(e1);
@@ -57,4 +71,5 @@ console.log(e2);
 printEmployeeInformation(e2);
 useVehicle(v1);
 useVehicle(v2);
+moveAnimal({ type: "bird", flyingSpeed: 10 });
 //# sourceMappingURL=app.js.map
