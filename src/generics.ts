@@ -81,6 +81,27 @@ numStorage.addItem(1);
 numStorage.addItem(2);
 numStorage.removeItem(1);
 
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntill: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date,
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntill = date;
+  return courseGoal as CourseGoal;
+}
+
+const peopleNames: Readonly<string[]> = ["Max", "Anna"];
+/* peopleNames.push("Manu"); // Mutation doesn't work */
+
 console.log("--------------Generics--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
@@ -93,3 +114,6 @@ console.log(countAndDescribe(["Sports"]));
 console.log(eac);
 console.log(textStorage.readItems());
 console.log(numStorage.readItems());
+console.log(
+  createCourseGoal("Revise TypeScript", "Get better in TypeScript", new Date()),
+);
