@@ -1,25 +1,18 @@
 console.log("--------------Decorators: Before Log--------------");
 
-function Logger(logString: string) {
-  return function handleLogger(constructor: any) {
+function WithLogger(logString: string) {
+  console.log("Logger Factory");
+  return function renderWithLogger(constructor: any) {
+    console.log("Rendering with Logger");
     console.log(logString);
     console.log(constructor);
   };
 }
 
-@Logger("Logging The Person...")
-class ThePerson {
-  name = "Max";
-
-  constructor() {
-    console.log("Creating the person object");
-  }
-}
-
-const max = new ThePerson();
-
 function WithTemplate(template: string, hookId: string) {
-  return function handleWithTemplate(constructor: any) {
+  console.log("Template Factory");
+  return function renderWithTemplate(constructor: any) {
+    console.log("Rendering with Template");
     const hookEl = document.getElementById(hookId);
     const p = new constructor();
     if (hookEl) {
@@ -30,6 +23,8 @@ function WithTemplate(template: string, hookId: string) {
 }
 
 const elem = "<div><h1>My Person Object</h1><h2></h2></div>";
+
+@WithLogger("Logging My Person...")
 @WithTemplate(elem, "app")
 class MyPerson {
   name = "Harry";
@@ -42,5 +37,4 @@ class MyPerson {
 const harry = new MyPerson();
 
 console.log("--------------Decorators--------------");
-console.log(max);
 console.log(harry);

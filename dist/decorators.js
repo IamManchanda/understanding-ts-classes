@@ -6,24 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 console.log("--------------Decorators: Before Log--------------");
-function Logger(logString) {
-    return function handleLogger(constructor) {
+function WithLogger(logString) {
+    console.log("Logger Factory");
+    return function renderWithLogger(constructor) {
+        console.log("Rendering with Logger");
         console.log(logString);
         console.log(constructor);
     };
 }
-let ThePerson = class ThePerson {
-    constructor() {
-        this.name = "Max";
-        console.log("Creating the person object");
-    }
-};
-ThePerson = __decorate([
-    Logger("Logging The Person...")
-], ThePerson);
-const max = new ThePerson();
 function WithTemplate(template, hookId) {
-    return function handleWithTemplate(constructor) {
+    console.log("Template Factory");
+    return function renderWithTemplate(constructor) {
+        console.log("Rendering with Template");
         const hookEl = document.getElementById(hookId);
         const p = new constructor();
         if (hookEl) {
@@ -40,10 +34,10 @@ let MyPerson = class MyPerson {
     }
 };
 MyPerson = __decorate([
+    WithLogger("Logging My Person..."),
     WithTemplate(elem, "app")
 ], MyPerson);
 const harry = new MyPerson();
 console.log("--------------Decorators--------------");
-console.log(max);
 console.log(harry);
 //# sourceMappingURL=decorators.js.map
