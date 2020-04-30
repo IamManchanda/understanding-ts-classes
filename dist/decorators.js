@@ -105,6 +105,32 @@ __decorate([
     Log3,
     __param(0, Log4)
 ], Product.prototype, "readPriceWithTax", null);
+function AutoBind(_target, _methodName, descriptor) {
+    const originalMethod = descriptor.value;
+    const adjustedDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        },
+    };
+    return adjustedDescriptor;
+}
+class Printer {
+    constructor() {
+        this.message = "This works";
+    }
+    showMessage() {
+        console.log(this.message);
+    }
+}
+__decorate([
+    AutoBind
+], Printer.prototype, "showMessage", null);
+const p = new Printer();
+const button = document.querySelector("button");
+button === null || button === void 0 ? void 0 : button.addEventListener("click", p.showMessage);
 console.log("--------------Decorators--------------");
 console.log(harry);
 //# sourceMappingURL=decorators.js.map
