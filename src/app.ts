@@ -106,6 +106,15 @@ if (userInputElement) {
   (userInputElement as HTMLInputElement).value = "Hello there!";
 }
 
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: "not a valid email address",
+  username: "must start with a capital letter",
+};
+
 console.log("--------------Adv. Types--------------");
 console.log(e1);
 printEmployeeInformation(e1);
@@ -114,3 +123,4 @@ printEmployeeInformation(e2);
 useVehicle(v1);
 useVehicle(v2);
 moveAnimal({ type: "bird", flyingSpeed: 10 });
+console.log(errorBag);
