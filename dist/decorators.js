@@ -21,7 +21,29 @@ let ThePerson = class ThePerson {
 ThePerson = __decorate([
     Logger("Logging The Person...")
 ], ThePerson);
-const pers = new ThePerson();
+const max = new ThePerson();
+function WithTemplate(template, hookId) {
+    return function handleWithTemplate(constructor) {
+        const hookEl = document.getElementById(hookId);
+        const p = new constructor();
+        if (hookEl) {
+            hookEl.innerHTML = template;
+            hookEl.querySelector("div").querySelector("h2").innerHTML = p.name;
+        }
+    };
+}
+const elem = "<div><h1>My Person Object</h1><h2></h2></div>";
+let MyPerson = class MyPerson {
+    constructor() {
+        this.name = "Harry";
+        console.log("Creating my person object");
+    }
+};
+MyPerson = __decorate([
+    WithTemplate(elem, "app")
+], MyPerson);
+const harry = new MyPerson();
 console.log("--------------Decorators--------------");
-console.log(pers);
+console.log(max);
+console.log(harry);
 //# sourceMappingURL=decorators.js.map
