@@ -11,14 +11,22 @@ function WithLogger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
   console.log("Template Factory");
-  return function renderWithTemplate(constructor: any) {
-    console.log("Rendering with Template");
-    const hookEl = document.getElementById(hookId);
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector("div")!.querySelector("h2")!.innerHTML = p.name;
-    }
+  return function renderWithTemplate<
+    T extends { new (...args: any[]): { name: string } }
+  >(originalConstructor: T) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log("Rendering with Template");
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl
+            .querySelector("div")!
+            .querySelector("h2")!.innerHTML = this.name;
+        }
+      }
+    };
   };
 }
 

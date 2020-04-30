@@ -19,14 +19,20 @@ function WithLogger(logString) {
 }
 function WithTemplate(template, hookId) {
     console.log("Template Factory");
-    return function renderWithTemplate(constructor) {
-        console.log("Rendering with Template");
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("div").querySelector("h2").innerHTML = p.name;
-        }
+    return function renderWithTemplate(originalConstructor) {
+        return class extends originalConstructor {
+            constructor(..._) {
+                super();
+                console.log("Rendering with Template");
+                const hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl
+                        .querySelector("div")
+                        .querySelector("h2").innerHTML = this.name;
+                }
+            }
+        };
     };
 }
 const elem = "<div><h1>My Person Object</h1><h2></h2></div>";
