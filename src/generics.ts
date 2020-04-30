@@ -54,7 +54,7 @@ const eacObj = {
 };
 const eac = extractAndConvert(eacObj, "name");
 
-console.log("--------------Generic Functions--------------");
+console.log("--------------Generics--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
 console.log(mergedObj.age);
