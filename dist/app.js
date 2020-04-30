@@ -8,12 +8,14 @@ const e2 = {
     name: "Harry",
     startDate: new Date(),
 };
-function addAandB(a, b) {
+function sum(a, b) {
     if (typeof a === "string" || typeof b === "string") {
         return a.toString() + b.toString();
     }
     return a + b;
 }
+const resultNum = sum(1, 4);
+const resultStr = sum("Harry", "Manchanda");
 function printEmployeeInformation(emp) {
     console.log(`Name: ${emp.name}`);
     if ("priveleges" in emp) {
@@ -67,6 +69,8 @@ const errorBag = {
     username: "must start with a capital letter",
 };
 console.log("--------------Adv. Types--------------");
+console.log(resultNum);
+console.log(resultStr);
 console.log(e1);
 printEmployeeInformation(e1);
 console.log(e2);

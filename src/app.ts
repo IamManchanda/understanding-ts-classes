@@ -26,12 +26,19 @@ type Numeric = number | boolean;
 
 type Universal = Combineable & Numeric;
 
-function addAandB(a: Combineable, b: Combineable) {
+function sum(a: number, b: number): number;
+function sum(a: string, b: number): string;
+function sum(a: number, b: string): string;
+function sum(a: string, b: string): string;
+function sum(a: Combineable, b: Combineable) {
   if (typeof a === "string" || typeof b === "string") {
     return a.toString() + b.toString();
   }
   return a + b;
 }
+
+const resultNum = sum(1, 4);
+const resultStr = sum("Harry", "Manchanda");
 
 type UnknownEmployee = Employee | Admin;
 
@@ -116,6 +123,8 @@ const errorBag: ErrorContainer = {
 };
 
 console.log("--------------Adv. Types--------------");
+console.log(resultNum);
+console.log(resultStr);
 console.log(e1);
 printEmployeeInformation(e1);
 console.log(e2);
