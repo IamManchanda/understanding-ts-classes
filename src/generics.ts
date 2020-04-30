@@ -54,6 +54,33 @@ const eacObj = {
 };
 const eac = extractAndConvert(eacObj, "name");
 
+class DataStorage<D extends string | number | boolean> {
+  private data: D[] = [];
+
+  addItem(item: D) {
+    this.data.push(item);
+  }
+
+  removeItem(item: D) {
+    if (this.data.indexOf(item) === -1) return;
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  readItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem("First Item");
+textStorage.addItem("Second Item");
+textStorage.removeItem("First Item");
+
+const numStorage = new DataStorage<number>();
+numStorage.addItem(1);
+numStorage.addItem(2);
+numStorage.removeItem(1);
+
 console.log("--------------Generics--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
@@ -64,3 +91,5 @@ console.log(countAndDescribe("Hello there!"));
 console.log(countAndDescribe([]));
 console.log(countAndDescribe(["Sports"]));
 console.log(eac);
+console.log(textStorage.readItems());
+console.log(numStorage.readItems());

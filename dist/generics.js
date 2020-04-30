@@ -27,6 +27,30 @@ const eacObj = {
     age: 30,
 };
 const eac = extractAndConvert(eacObj, "name");
+class DataStorage {
+    constructor() {
+        this.data = [];
+    }
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        if (this.data.indexOf(item) === -1)
+            return;
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    readItems() {
+        return [...this.data];
+    }
+}
+const textStorage = new DataStorage();
+textStorage.addItem("First Item");
+textStorage.addItem("Second Item");
+textStorage.removeItem("First Item");
+const numStorage = new DataStorage();
+numStorage.addItem(1);
+numStorage.addItem(2);
+numStorage.removeItem(1);
 console.log("--------------Generics--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
@@ -37,4 +61,6 @@ console.log(countAndDescribe("Hello there!"));
 console.log(countAndDescribe([]));
 console.log(countAndDescribe(["Sports"]));
 console.log(eac);
+console.log(textStorage.readItems());
+console.log(numStorage.readItems());
 //# sourceMappingURL=generics.js.map
