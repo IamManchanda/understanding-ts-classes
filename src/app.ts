@@ -23,8 +23,30 @@ function merge<A extends IntA, B extends IntB>(objA: A, objB: B) {
 
 const mergedObj = merge({ name: "Max", hobbies: ["Sports"] }, { age: 30 });
 
+interface Lengthy {
+  length: number;
+}
+
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+  let description;
+  if (element.length > 0) {
+    if (element.length === 1) {
+      description = "Got 1 element";
+    } else {
+      description = `Got ${element.length} elements`;
+    }
+  } else {
+    description = "Got no elements";
+  }
+  return [element, description];
+}
+
 console.log("--------------Generic Functions--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
 console.log(mergedObj.age);
 console.log(mergedObj.hobbies);
+console.log(countAndDescribe(""));
+console.log(countAndDescribe("Hello there!"));
+console.log(countAndDescribe([]));
+console.log(countAndDescribe(["Sports"]));
