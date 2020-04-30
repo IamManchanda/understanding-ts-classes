@@ -41,6 +41,19 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   return [element, description];
 }
 
+function extractAndConvert<O extends object, K extends keyof O>(
+  obj: O,
+  key: K,
+) {
+  return `Value ${obj[key]}`;
+}
+
+const eacObj = {
+  name: "Harry",
+  age: 30,
+};
+const eac = extractAndConvert(eacObj, "name");
+
 console.log("--------------Generic Functions--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
@@ -50,3 +63,4 @@ console.log(countAndDescribe(""));
 console.log(countAndDescribe("Hello there!"));
 console.log(countAndDescribe([]));
 console.log(countAndDescribe(["Sports"]));
+console.log(eac);
