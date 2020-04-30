@@ -4,7 +4,7 @@ function merge(objA, objB) {
     return Object.assign(objA, objB);
 }
 const mergedObj = merge({ name: "Max", hobbies: ["Sports"] }, { age: 30 });
-console.log("--------------Generics--------------");
+console.log("--------------Generic Functions--------------");
 console.log(mergedObj);
 console.log(mergedObj.name);
 console.log(mergedObj.age);
