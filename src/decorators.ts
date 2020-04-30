@@ -36,5 +36,34 @@ class MyPerson {
 
 const harry = new MyPerson();
 
+function Log(target: any, propertyName: string | Symbol) {
+  console.log("Property Decorators");
+  console.log(target, propertyName);
+}
+
+class Product {
+  @Log
+  title: string;
+  private _price: number;
+  constructor(title: string, _price: number) {
+    this.title = title;
+    this._price = _price;
+  }
+
+  set price(val: number) {
+    if (val > 0) {
+      this._price = val;
+    } else {
+      throw new Error(
+        "Invalid Price, should be a positive number & more than zero",
+      );
+    }
+  }
+
+  readPriceWithTax(tax: number): number {
+    return this._price * (1 + tax);
+  }
+}
+
 console.log("--------------Decorators--------------");
 console.log(harry);

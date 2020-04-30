@@ -38,6 +38,30 @@ MyPerson = __decorate([
     WithTemplate(elem, "app")
 ], MyPerson);
 const harry = new MyPerson();
+function Log(target, propertyName) {
+    console.log("Property Decorators");
+    console.log(target, propertyName);
+}
+class Product {
+    constructor(title, _price) {
+        this.title = title;
+        this._price = _price;
+    }
+    set price(val) {
+        if (val > 0) {
+            this._price = val;
+        }
+        else {
+            throw new Error("Invalid Price, should be a positive number & more than zero");
+        }
+    }
+    readPriceWithTax(tax) {
+        return this._price * (1 + tax);
+    }
+}
+__decorate([
+    Log
+], Product.prototype, "title", void 0);
 console.log("--------------Decorators--------------");
 console.log(harry);
 //# sourceMappingURL=decorators.js.map
